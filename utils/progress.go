@@ -37,10 +37,7 @@ func (p *ProgressWriter) Write(data []byte) (int, error) {
 		return n, nil
 	}
 	p.bar.Tick(int64(n))
-	// Due to a small issue with logs intertwining with the progress bar,
-	// due to the actual artifact being bigger than the payload, make the
-	// progressbar a little forgiving at the end.
-	if p.bar.Percentage == 99 {
+	if p.bar.Percentage == 100 {
 		p.bar.Finish()
 		p.finished = true
 	}
